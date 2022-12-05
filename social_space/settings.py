@@ -52,6 +52,9 @@ INSTALLED_APPS = [
     'cloudinary',
     'rest_framework',
     'profiles',
+    'post',
+    'django_summernote',
+    
 ]
 
 MIDDLEWARE = [
