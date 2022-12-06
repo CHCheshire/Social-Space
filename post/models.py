@@ -6,14 +6,25 @@ STATUS = ((0, "Draft"), (1, "Published"))
 
 
 class Post(models.Model):
+
+    featured_image_filter_choices = [
+        ('_1977', '1977'), ('brannan', 'Brannan'),
+        ('earlybird', 'Earlybird'), ('hudson', 'Hudson'),
+        ('inkwell', 'Inkwell'), ('lofi', 'Lo-Fi'),
+        ('kelvin', 'Kelvin'), ('normal', 'Normal'),
+        ('nashville', 'Nashville'), ('rise', 'Rise'),
+        ('toaster', 'Toaster'), ('valencia', 'Valencia'),
+        ('walden', 'Walden'), ('xpro2', 'X-pro II')
+    ]   
+
     title = models.CharField(max_length=200, unique=True)
-    slug = models.SlugField(max_length=200, unique=True)
-    author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="blog_posts")
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     updated_on = models.DateTimeField(auto_now=True)
     content = models.TextField()
-    featured_image = CloudinaryField(
-        'image', default='../default-profile-pic_umyizm')
+    featured_image = CloudinaryField('image', default='placeholder')
+    featured_image_filter = models.CharField(
+        max_length=32, choices=featured_image_filter_choices, default='normal'
+    )
     excerpt = models.TextField(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
@@ -27,19 +38,3 @@ class Post(models.Model):
 
     def number_of_likes(self):
         return self.likes.count()
-
-
-class Comment(models.Model):
-
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
-    name = models.CharField(max_length=80)
-    email = models.EmailField()
-    body = models.TextField()
-    created_on = models.DateTimeField(auto_now_add=True)
-    approved = models.BooleanField(default=False)
-
-    class Meta:
-        ordering = ['created_on']
-
-    def _str_(self):
-        return f"comment {self.body} by {self.name}"
