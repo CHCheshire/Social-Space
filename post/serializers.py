@@ -12,9 +12,24 @@ class PostSerializer(serializers.ModelSerializer):
         request = self.context['request']
         return request.user == obj.owner
 
+    def validate_featured_image(self, value):
+        if value.size > 1024 * 1024 * 2:
+            raise serializers.ValidationError(
+                'Image size larger than 2MB!'
+            )
+        if value.featured_image.width > 4096:
+            raise serializers.ValidationError(
+                'Image width larger than 4096px'
+            )
+        if value.featured_image.height > 4096:
+            raise serializers.ValidationError(
+                'Image height larger than 4096px'
+            )
+        return value
+
     class Meta:
         model = Post
         fields = [
-            'title', 'slug', 'author', 'updated_on', 'content',
+            'title', 'author', 'updated_on', 'content',
             'featured_image', 'excerpt', 'created_on', 'status', 'likes',
-            'profile_id', 'profile_image']
+            'profile_id', 'profile_image', 'featured_image_filter']
