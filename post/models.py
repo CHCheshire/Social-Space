@@ -36,5 +36,5 @@ class Post(models.Model):
     class Meta:
         ordering = ['-created_on']
 
-    def _str_(self):
-        return self.title
+    def __str__(self):
+        return f'{self.id} {self.title}'
