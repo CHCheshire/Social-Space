@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'profiles',
     'post',
+    'likes',
     'django_summernote',
     'comments',
     
