@@ -1,24 +1,27 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models import Avg
 # Create your models here.
 
 
 class Review(models.Model):
-    header = models.Charfield(Max_length=150, default="Header")
-    text = models.TextField()
 
-    def average_rating(self) -> float:
-        return Rating.object.filter(post=self).aggregate(Avg("rating"))["rating__avg"] or 0
-   
+    review_tag_choices = [
+        ('game', 'Game'),
+        ('Film', 'film'),
+        ('Boardgame', 'boardgame'),
+        ('Book', 'book'),
+        ('Tv Series', 'tv series'),
+        ('Blank', 'blank')
+    ]   
+
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    header = models.CharField(max_length=150, default="Header")
+    text = models.TextField(blank=True)
+    rating = models.IntegerField(default="0")
+    created_on = models.DateTimeField(auto_now_add=True)
+    review_tag = models.CharField(
+        max_length=32, choices=review_tag_choices, default='blank'
+    )
+
     def __str__(self):
-        return f"{self.header}: {self.avergae_rating()}"
-
-
-class Rating(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    rating = models.IntegerField(default=0)
-
-    def __str__(self):
-        return f"{self.post.header}: {self.rating}"
+        return f"{self.header}: {self.rating} out of 10"
