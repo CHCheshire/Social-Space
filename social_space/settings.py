@@ -56,7 +56,7 @@ INSTALLED_APPS = [
     'likes',
     'django_summernote',
     'comments',
-    
+    'reviews',
 ]
 
 MIDDLEWARE = [
