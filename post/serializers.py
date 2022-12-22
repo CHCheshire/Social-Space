@@ -6,7 +6,8 @@ class PostSerializer(serializers.ModelSerializer):
     author = serializers.ReadOnlyField(source='author.username')
     is_author = serializers.SerializerMethodField()
     profile_id = serializers.ReadOnlyField(source='author.profile.id')
-    profile_image = serializers.ReadOnlyField(source='author.profile.image.url')
+    profile_image = serializers.ReadOnlyField(
+        source='author.profile.image.url')
 
     def get_is_author(self, obj):
         request = self.context['request']
@@ -26,6 +27,12 @@ class PostSerializer(serializers.ModelSerializer):
                 'Image height larger than 4096px'
             )
         return value
+
+    def get_created_on(self, obj):
+        return naturaltime(obj.created_on)
+        
+    def get_updated_on(self, obj):
+        return naturaltime(obj.updated_on)
 
     class Meta:
         model = Post
