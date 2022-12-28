@@ -174,7 +174,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "https://chcheshire-socialspace-srqfs8poiw7.ws-eu80.gitpod.io"
+    "https://chcheshire-socialspace-srqfs8poiw7.ws-eu80.gitpod.io",
+    "http://localhost:8080",
+    "http://127.0.0.1:9000",
 ]
 
 
