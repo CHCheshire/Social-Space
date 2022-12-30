@@ -64,7 +64,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEV' in os.environ
 
-ALLOWED_HOSTS = [ os.environ.get('ALLOWED_HOST'), 'localhost', ]
+ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOST'), 'localhost']
 
 
 # Application definition
@@ -110,12 +110,19 @@ MIDDLEWARE = [
 
 if 'CLIENT_ORIGIN' in os.environ:
     CORS_ALLOWED_ORIGINS = [
-       os.environ.get('CLIENT_ORIGIN')
+       os.environ.get('CLIENT_ORIGIN'),
+       os.environ.get('CLIENT_ORIGIN_DEV')
      ]
 else:
     CORS_ALLOWED_ORIGIN_REGEXES = [
         r"^https://.*\.gitpod\.io$",
     ]
+
+CSRF_TRUSTED_ORIGINS = [os.environ.get(
+    'CLIENT_ORIGIN_DEV',
+    'CLIENT_ORIGIN',
+    )]
+
 
 CORS_ALLOW_CREDENTIALS = True
 
