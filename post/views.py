@@ -1,10 +1,11 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework import status, permissions
+from rest_framework import status, permissions, filters
 from .models import Post
 from .serializers import PostSerializer
 from django.http import Http404
 from social_space.permissions import IsOwnerOrReadOnly
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class PostList(APIView):
@@ -13,10 +14,18 @@ class PostList(APIView):
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly
     ]
+    queryset = Post.objects.all()
+    search_fields = ['author_username', 'title']
+    filter_backends = [
+        filters.OrderingFilter,
+        filters.SearchFilter,
+        DjangoFilterBackend,
+    ]
 
     def get(self, request):
         post = Post.objects.all()
-        serializer = PostSerializer(post, many=True, context={'request': request})
+        serializer = PostSerializer(
+            post, many=True, context={'request': request})
         return Response(serializer.data)
 
     def post(self, request):
