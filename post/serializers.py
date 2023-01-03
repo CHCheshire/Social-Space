@@ -39,4 +39,4 @@ class PostSerializer(serializers.ModelSerializer):
         fields = [
             'title', 'author', 'is_author', 'updated_on', 'content',
             'featured_image', 'created_on',
-            'profile_id', 'profile_image', 'featured_image_filter']
+            'profile_id', 'profile_image', 'post_tag']
