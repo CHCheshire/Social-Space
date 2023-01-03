@@ -4,8 +4,9 @@ from .models import Review
 from .serializers import ReviewSerializer
 from social_space.permissions import IsOwnerOrReadOnly
 from rest_framework.response import Response
-from rest_framework import permissions, status
+from rest_framework import permissions, status, filters
 from django.http import Http404
+from django_filters.rest_framework import DjangoFilterBackend
 
 # Create your views here.
 
@@ -13,10 +14,21 @@ from django.http import Http404
 class ReviewList(APIView):
 
     serializer_class = ReviewSerializer
+    permission_classes = [
+        permissions.IsAuthenticatedOrReadOnly
+    ]
+    queryset = Review.objects.all()
+    search_fields = ['author_username', 'header']
+    filter_backends = [
+        filters.OrderingFilter,
+        filters.SearchFilter,
+        DjangoFilterBackend,
+    ]
 
     def get(self, request):
         review = Review.objects.all()
-        serializer = ReviewSerializer(review, many=True, context={'request': request})
+        serializer = ReviewSerializer(
+            review, many=True, context={'request': request})
         return Response(serializer.data)
 
     def post(self, request):
