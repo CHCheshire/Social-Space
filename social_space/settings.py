@@ -90,7 +90,6 @@ INSTALLED_APPS = [
     'profiles',
     'post',
     'likes',
-    'django_summernote',
     'comments',
     'reviews',
 ]
