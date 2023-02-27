@@ -64,7 +64,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = 'DEV' in os.environ
 
 ALLOWED_HOSTS = [
-    'https://social-space-api.herokuapp.com/',
+    'https://social-space-api.herokuapp.com',
     'localhost',
 ]
 
