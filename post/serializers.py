@@ -30,13 +30,23 @@ class PostSerializer(serializers.ModelSerializer):
 
     def get_created_on(self, obj):
         return naturaltime(obj.created_on)
-        
+       
     def get_updated_on(self, obj):
         return naturaltime(obj.updated_on)
+
+    def get_like_id(self, obj):
+        user = self.context['request'].user
+        if user.is_authenticated:
+            like = Like.objects.filter(
+                owner=user, post=obj
+            ).first()
+            return like.id if like else None
+        return None
 
     class Meta:
         model = Post
         fields = [
             'title', 'author', 'is_author', 'updated_on', 'content',
             'featured_image', 'created_on',
-            'profile_id', 'profile_image', 'post_tag']
+            'profile_id', 'profile_image', 'like_id', 'likes_count',
+            'post_tag']
