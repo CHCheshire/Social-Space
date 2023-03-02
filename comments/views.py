@@ -11,7 +11,6 @@ class CommentList(generics.ListCreateAPIView):
     serializer_class = CommentSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Comment.objects.all()
-    filterset_fields = ['post']
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
