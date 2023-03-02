@@ -52,4 +52,4 @@ class PostSerializer(serializers.ModelSerializer):
             'title', 'author', 'is_author', 'updated_on', 'content',
             'featured_image', 'created_on',
             'profile_id', 'profile_image', 'like_id', 'likes_count',
-            'post_tag']
+            'post_tag', 'id']
