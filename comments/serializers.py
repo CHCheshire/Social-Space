@@ -12,8 +12,6 @@ class CommentSerializer(serializers.ModelSerializer):
     profile_id = serializers.ReadOnlyField(source='author.profile.id')
     profile_image = serializers.ReadOnlyField(
         source='author.profile.image.url')
-    created_on = serializers.SerializerMethodField()
-    updated_on = serializers.SerializerMethodField()
 
     def get_is_author(self, obj):
         request = self.context['request']
