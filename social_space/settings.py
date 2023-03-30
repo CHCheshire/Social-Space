@@ -18,8 +18,6 @@ import dj_database_url
 if os.path.exists('env.py'):
     import env
 
-SECRET_KEY = ('Seraphim343!')
-
 CLOUDINARY_STORAGE = {
     'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL')
 }
