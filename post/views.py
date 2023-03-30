@@ -15,7 +15,7 @@ class PostList(APIView):
         permissions.IsAuthenticatedOrReadOnly
     ]
     queryset = Post.objects.all()
-    search_fields = ['author_username', 'title']
+    search_fields = ['owner_username', 'title']
     filter_backends = [
         filters.OrderingFilter,
         filters.SearchFilter,
@@ -33,7 +33,7 @@ class PostList(APIView):
             data=request.data, context={'request': request}
         )
         if serializer.is_valid():
-            serializer.save(author=request.user)
+            serializer.save(owner=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(
             serializer.errors, status=status.HTTP_400_BAD_REQUEST
