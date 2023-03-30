@@ -9,7 +9,7 @@ class Like(models.Model):
     'owner' is a User instance and 'post' is a Post instance.
     'unique_together' makes sure a user can't like the same post twice.
     """
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(
         Post, related_name='likes', on_delete=models.CASCADE
     )
@@ -17,7 +17,7 @@ class Like(models.Model):
 
     class Meta:
         ordering = ['-created_on']
-        unique_together = ['author', 'post']
+        unique_together = ['owner', 'post']
 
     def __str__(self):
-        return f'{self.author} {self.post}'
+        return f'{self.owner} {self.post}'
