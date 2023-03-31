@@ -188,6 +188,21 @@ Following in on from the feedback I had gotten, I had changed the font on the si
   - [react] (https://reactjs.org/)
   - [react-moment] (https://www.npmjs.com/package/react-moment)
   - [react-bootstrap] (https://www.npmjs.com/package/react-bootstrap)
+  - [axios] (https://www.npmjs.com/package/axios)
+  - [react-moment] (https://www.npmjs.com/package/react-moment)
+  - [react-infinite-scroll-component] (https://www.npmjs.com/package/react-infinite-scroll-component)
+  - [sqlparse] (https://pypi.org/project/sqlparse/)
+  - [cryptography] (https://pypi.org/project/cryptography/)
+  - [django-rest-framework] (https://www.django-rest-framework.org/)
+  - [PyJWT] (https://pypi.org/project/PyJWT/)
+  - [dj-rest-auth] (https://pypi.org/project/dj-rest-auth/)
+  - [django-allauth] (https://pypi.org/project/django-allauth/)
+  - [django-cors-headers] (https://pypi.org/project/django-cors-headers/)
+  - [django-filter] (https://pypi.org/project/django-filter/)
+  - [Pillow] (https://pypi.org/project/Pillow/)
+  - [oauthlib] (https://pypi.org/project/oauthlib/)
+  - [python3-openid] (https://pypi.org/project/python3-openid/)
+  - [pytz] (https://pypi.org/project/pytz/)
   
  
 ### Programs & Tools
